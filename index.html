@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔法识字乐园 - 儿童识字图片生成网站</title>
+
+    <!-- Preconnect to fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Disney-style fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue:wght@700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <!-- Additional styles for GitHub Pages compatibility -->
+    <style>
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: calc(200px + 100%) 0; }
+        }
+    </style>
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🏰</text></svg>">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="castle-loader">
+            <div class="castle">🏰</div>
+            <div class="stars">
+                <span class="star">✨</span>
+                <span class="star">⭐</span>
+                <span class="star">✨</span>
+            </div>
+            <p class="loading-text">魔法加载中...</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🏰</span>
+                    <h1 class="logo-text">魔法识字乐园</h1>
+                    <span class="logo-subtitle">让学习充满魔法</span>
+                </div>
+                <nav class="nav">
+                    <button class="nav-btn active" data-page="generate">
+                        <span class="btn-icon">✨</span>
+                        <span>生成图片</span>
+                    </button>
+                    <button class="nav-btn" data-page="history">
+                        <span class="btn-icon">📚</span>
+                        <span>历史记录</span>
+                    </button>
+                    <button class="nav-btn" data-page="about">
+                        <span class="btn-icon">ℹ️</span>
+                        <span>关于我们</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Generate Page -->
+        <section id="generatePage" class="page active">
+            <div class="container">
+                <div class="page-header">
+                    <h2 class="page-title">
+                        <span class="title-icon">🎨</span>
+                        创建你的识字图片
+                    </h2>
+                    <p class="page-subtitle">选择一个主题，输入标题，让AI为你创造神奇的识字图片！</p>
+                </div>
+
+                <div class="generate-form">
+                    <!-- Theme Selection -->
+                    <div class="form-section">
+                        <label class="form-label">
+                            <span class="label-icon">🌈</span>
+                            选择主题场景
+                        </label>
+                        <div class="theme-grid" id="themeGrid">
+                            <!-- Themes will be dynamically added here -->
+                        </div>
+                    </div>
+
+                    <!-- Title Input -->
+                    <div class="form-section">
+                        <label class="form-label" for="titleInput">
+                            <span class="label-icon">✏️</span>
+                            小报标题
+                        </label>
+                        <div class="input-wrapper">
+                            <input
+                                type="text"
+                                id="titleInput"
+                                class="magic-input"
+                                placeholder="给你的识字图片起个好听的名字..."
+                                maxlength="30"
+                            >
+                            <span class="input-counter" id="titleCounter">0/30</span>
+                        </div>
+                        <div class="input-suggestions">
+                            <span class="suggestion-label">灵感提示：</span>
+                            <button class="suggestion-btn" data-suggestion="快乐超市购物">快乐超市购物</button>
+                            <button class="suggestion-btn" data-suggestion="神奇的医院">神奇的医院</button>
+                            <button class="suggestion-btn" data-suggestion="公园里的欢乐时光">公园里的欢乐时光</button>
+                        </div>
+                    </div>
+
+                    <!-- API Key Input -->
+                    <div class="form-section">
+                        <label class="form-label" for="apiKeyInput">
+                            <span class="label-icon">🔑</span>
+                            API 密钥
+                        </label>
+                        <div class="input-wrapper">
+                            <input
+                                type="password"
+                                id="apiKeyInput"
+                                class="magic-input"
+                                placeholder="输入你的 Nano Banana Pro API 密钥"
+                            >
+                            <button class="toggle-visibility" id="toggleApiKey">
+                                <span class="eye-icon">👁️</span>
+                            </button>
+                        </div>
+                        <p class="form-hint">
+                            📝 API密钥用于生成图片，请访问 <a href="https://kie.ai/api-key" target="_blank">KIE AI</a> 获取
+                        </p>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <div class="form-section">
+                        <button id="generateBtn" class="magic-btn generate-btn" disabled>
+                            <span class="btn-content">
+                                <span class="btn-icon">🪄</span>
+                                <span class="btn-text">开始生成魔法图片</span>
+                            </span>
+                            <div class="sparkles">
+                                <span class="sparkle">✨</span>
+                                <span class="sparkle">⭐</span>
+                                <span class="sparkle">✨</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result Section -->
+                <div id="resultSection" class="result-section hidden">
+                    <h3 class="result-title">
+                        <span class="title-icon">🎉</span>
+                        你的魔法图片完成啦！
+                    </h3>
+                    <div class="result-content">
+                        <div class="image-container">
+                            <img id="resultImage" alt="生成的识字图片" class="result-image" onerror="handleImageError(this)">
+                            <div class="image-overlay">
+                                <button class="overlay-btn" id="downloadBtn">
+                                    <span class="btn-icon">💾</span>
+                                    <span>下载图片</span>
+                                </button>
+                                <button class="overlay-btn" id="saveHistoryBtn">
+                                    <span class="btn-icon">💝</span>
+                                    <span>查看详情</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="secondary-btn" id="generateAnotherBtn">
+                        <span class="btn-icon">🔄</span>
+                        <span>再生成一张</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Page -->
+        <section id="historyPage" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h2 class="page-title">
+                        <span class="title-icon">📚</span>
+                        我的识字图片集
+                    </h2>
+                    <p class="page-subtitle">查看和下载你之前生成的所有识字图片</p>
+                </div>
+
+                <div class="history-controls">
+                    <button class="secondary-btn" id="clearHistoryBtn">
+                        <span class="btn-icon">🗑️</span>
+                        <span>清空历史</span>
+                    </button>
+                    <button class="secondary-btn" id="exportHistoryBtn">
+                        <span class="btn-icon">📤</span>
+                        <span>导出记录</span>
+                    </button>
+                </div>
+
+                <div id="historyGrid" class="history-grid">
+                    <!-- History items will be dynamically added here -->
+                </div>
+
+                <div id="emptyHistory" class="empty-state">
+                    <div class="empty-icon">📝</div>
+                    <h3>还没有识字图片</h3>
+                    <p>快去生成你的第一张魔法图片吧！</p>
+                    <button class="magic-btn" onclick="switchPage('generate')">
+                        <span class="btn-icon">✨</span>
+                        <span>开始生成</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="aboutPage" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h2 class="page-title">
+                        <span class="title-icon">ℹ️</span>
+                        关于魔法识字乐园
+                    </h2>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-card">
+                        <h3>
+                            <span class="card-icon">🎯</span>
+                            我们的使命
+                        </h3>
+                        <p>通过AI技术和创意设计，为5-9岁儿童创造有趣、有效的中文学习体验。每个汉字都通过生动的场景图片来呈现，让学习变得像玩游戏一样快乐！</p>
+                    </div>
+
+                    <div class="about-card">
+                        <h3>
+                            <span class="card-icon">✨</span>
+                            特色功能
+                        </h3>
+                        <ul>
+                            <li>🎨 迪士尼风格的精美界面设计</li>
+                            <li>🤖 基于Nano Banana Pro的AI图片生成</li>
+                            <li>📚 丰富的主题场景词汇库</li>
+                            <li>💾 本地历史记录保存</li>
+                            <li>📱 完全响应式设计</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-card">
+                        <h3>
+                            <span class="card-icon">👨‍👩‍👧‍👦</span>
+                            适用年龄
+                        </h3>
+                        <p>专为5-9岁儿童设计，内容难度循序渐进，符合儿童认知发展规律。</p>
+                    </div>
+
+                    <div class="about-card">
+                        <h3>
+                            <span class="card-icon">🛡️</span>
+                            隐私保护
+                        </h3>
+                        <p>我们非常重视儿童隐私保护。所有数据仅存储在本地，不会上传到任何服务器。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span>❤️ 用爱制作，为孩子们创造更好的学习体验</span>
+                <span class="separator">|</span>
+                <span>© 2024 魔法识字乐园</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modalContainer" class="modal-container hidden">
+        <!-- Modals will be dynamically added here -->
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container">
+        <!-- Toast messages will be dynamically added here -->
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 最简化版本 - 确保页面能正常加载
+        console.log('🏰 启动魔法识字乐园...');
+
+        // 立即隐藏加载屏幕
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                loadingScreen.style.display = 'none';
+            }
+        }, 1000);
+
+        // 全局数据
+        window.appData = {
+            selectedTheme: null,
+            currentResult: null,
+            isGenerating: false,
+            themesData: {
+                "supermarket": {
+                    "name": "超市", "icon": "🛒",
+                    "vocabulary": {"core": [
+                        {"chinese": "收银员", "pinyin": "shōu yín yuán"},
+                        {"chinese": "货架", "pinyin": "huò jià"},
+                        {"chinese": "购物车", "pinyin": "gòu wù chē"},
+                        {"chinese": "收银台", "pinyin": "shōu yín tái"},
+                        {"chinese": "苹果", "pinyin": "píng guǒ"},
+                        {"chinese": "牛奶", "pinyin": "niú nǎi"},
+                        {"chinese": "面包", "pinyin": "miàn bāo"}
+                    ]}
+                },
+                "park": {
+                    "name": "公园", "icon": "🌳",
+                    "vocabulary": {"core": [
+                        {"chinese": "大树", "pinyin": "dà shù"},
+                        {"chinese": "草地", "pinyin": "cǎo dì"},
+                        {"chinese": "长椅", "pinyin": "cháng yǐ"},
+                        {"chinese": "秋千", "pinyin": "qiū qiān"},
+                        {"chinese": "滑梯", "pinyin": "huá tī"},
+                        {"chinese": "花朵", "pinyin": "huā duǒ"},
+                        {"chinese": "小路", "pinyin": "xiǎo lù"}
+                    ]}
+                },
+                "zoo": {
+                    "name": "动物园", "icon": "🦁",
+                    "vocabulary": {"core": [
+                        {"chinese": "狮子", "pinyin": "shī zi"},
+                        {"chinese": "大象", "pinyin": "dà xiàng"},
+                        {"chinese": "猴子", "pinyin": "hóu zi"},
+                        {"chinese": "熊猫", "pinyin": "xióng māo"},
+                        {"chinese": "老虎", "pinyin": "lǎo hǔ"},
+                        {"chinese": "长颈鹿", "pinyin": "cháng jǐng lù"},
+                        {"chinese": "斑马", "pinyin": "bān mǎ"}
+                    ]}
+                },
+                "school": {
+                    "name": "学校", "icon": "🏫",
+                    "vocabulary": {"core": [
+                        {"chinese": "老师", "pinyin": "lǎo shī"},
+                        {"chinese": "学生", "pinyin": "xué shēng"},
+                        {"chinese": "教室", "pinyin": "jiào shì"},
+                        {"chinese": "课桌", "pinyin": "kè zhuō"},
+                        {"chinese": "黑板", "pinyin": "hēi bǎn"},
+                        {"chinese": "铅笔", "pinyin": "qiān bǐ"},
+                        {"chinese": "书本", "pinyin": "shū běn"}
+                    ]}
+                },
+                "hospital": {
+                    "name": "医院", "icon": "🏥",
+                    "vocabulary": {"core": [
+                        {"chinese": "医生", "pinyin": "yī shēng"},
+                        {"chinese": "护士", "pinyin": "hù shi"},
+                        {"chinese": "病人", "pinyin": "bìng rén"},
+                        {"chinese": "病床", "pinyin": "bìng chuáng"},
+                        {"chinese": "听诊器", "pinyin": "tīng zhěn qì"},
+                        {"chinese": "药片", "pinyin": "yào piàn"},
+                        {"chinese": "体温计", "pinyin": "tǐ wēn jì"}
+                    ]}
+                },
+                "home": {
+                    "name": "家庭", "icon": "🏠",
+                    "vocabulary": {"core": [
+                        {"chinese": "爸爸", "pinyin": "bà ba"},
+                        {"chinese": "妈妈", "pinyin": "mā ma"},
+                        {"chinese": "孩子", "pinyin": "hái zi"},
+                        {"chinese": "桌子", "pinyin": "zhuō zi"},
+                        {"chinese": "椅子", "pinyin": "yǐ zi"},
+                        {"chinese": "沙发", "pinyin": "shā fā"},
+                        {"chinese": "电视", "pinyin": "diàn shì"}
+                    ]}
+                },
+                "restaurant": {
+                    "name": "餐厅", "icon": "🍴",
+                    "vocabulary": {"core": [
+                        {"chinese": "服务员", "pinyin": "fú wù yuán"},
+                        {"chinese": "菜单", "pinyin": "cài dān"},
+                        {"chinese": "餐桌", "pinyin": "cān zhuō"},
+                        {"chinese": "米饭", "pinyin": "mǐ fàn"},
+                        {"chinese": "面条", "pinyin": "miàn tiáo"},
+                        {"chinese": "饺子", "pinyin": "jiǎo zi"},
+                        {"chinese": "筷子", "pinyin": "kuài zi"}
+                    ]}
+                },
+                "playground": {
+                    "name": "游乐场", "icon": "🎠",
+                    "vocabulary": {"core": [
+                        {"chinese": "旋转木马", "pinyin": "xuán zhuǎn mù mǎ"},
+                        {"chinese": "摩天轮", "pinyin": "mó tiān lún"},
+                        {"chinese": "过山车", "pinyin": "guò shān chē"},
+                        {"chinese": "碰碰车", "pinyin": "pèng pèng chē"},
+                        {"chinese": "跷跷板", "pinyin": "qiāo qiāo bǎn"},
+                        {"chinese": "沙坑", "pinyin": "shā kēng"},
+                        {"chinese": "小火车", "pinyin": "xiǎo huǒ chē"}
+                    ]}
+                },
+                "farm": {
+                    "name": "农场", "icon": "🚜",
+                    "vocabulary": {"core": [
+                        {"chinese": "农民", "pinyin": "nóng mín"},
+                        {"chinese": "稻田", "pinyin": "dào tián"},
+                        {"chinese": "拖拉机", "pinyin": "tuō lā jī"},
+                        {"chinese": "小鸡", "pinyin": "xiǎo jī"},
+                        {"chinese": "小鸭", "pinyin": "xiǎo yā"},
+                        {"chinese": "小猪", "pinyin": "xiǎo zhū"},
+                        {"chinese": "稻草人", "pinyin": "dào cǎo rén"}
+                    ]}
+                },
+                "beach": {
+                    "name": "海滩", "icon": "🏖️",
+                    "vocabulary": {"core": [
+                        {"chinese": "沙滩", "pinyin": "shā tān"},
+                        {"chinese": "海浪", "pinyin": "hǎi làng"},
+                        {"chinese": "贝壳", "pinyin": "bèi ké"},
+                        {"chinese": "螃蟹", "pinyin": "páng xiè"},
+                        {"chinese": "海星", "pinyin": "hǎi xīng"},
+                        {"chinese": "救生圈", "pinyin": "jiù shēng quān"},
+                        {"chinese": "遮阳伞", "pinyin": "zhē yáng sǎn"}
+                    ]}
+                },
+                "space": {
+                    "name": "太空", "icon": "🚀",
+                    "vocabulary": {"core": [
+                        {"chinese": "宇航员", "pinyin": "yǔ háng yuán"},
+                        {"chinese": "火箭", "pinyin": "huǒ jiàn"},
+                        {"chinese": "地球", "pinyin": "dì qiú"},
+                        {"chinese": "月亮", "pinyin": "yuè liang"},
+                        {"chinese": "星星", "pinyin": "xīng xing"},
+                        {"chinese": "太空船", "pinyin": "tài kōng chuán"},
+                        {"chinese": "卫星", "pinyin": "wèi xīng"}
+                    ]}
+                },
+                "underwater": {
+                    "name": "海底世界", "icon": "🐠",
+                    "vocabulary": {"core": [
+                        {"chinese": "潜水员", "pinyin": "qián shuǐ yuán"},
+                        {"chinese": "珊瑚", "pinyin": "shān hú"},
+                        {"chinese": "海草", "pinyin": "hǎi cǎo"},
+                        {"chinese": "热带鱼", "pinyin": "rè dài yú"},
+                        {"chinese": "海龟", "pinyin": "hǎi guī"},
+                        {"chinese": "章鱼", "pinyin": "zhāng yú"},
+                        {"chinese": "水母", "pinyin": "shuǐ mǔ"}
+                    ]}
+                }
+            }
+        };
+
+        // 恢复用户输入（在页面加载时）
+        function restoreUserInput() {
+            try {
+                const savedTitle = localStorage.getItem('literacy_user_title');
+                const savedApiKey = localStorage.getItem('literacy_user_api_key');
+                const savedTheme = localStorage.getItem('literacy_user_theme');
+
+                if (savedTitle) {
+                    const titleInput = document.getElementById('titleInput');
+                    if (titleInput) {
+                        titleInput.value = savedTitle;
+                        console.log('Restored title input');
+                    }
+                }
+
+                if (savedApiKey) {
+                    const apiKeyInput = document.getElementById('apiKeyInput');
+                    if (apiKeyInput) {
+                        apiKeyInput.value = savedApiKey;
+                        console.log('Restored API key input');
+                    }
+                }
+
+                if (savedTheme && window.appData.themesData[savedTheme]) {
+                    window.appData.selectedTheme = savedTheme;
+                    // 延迟更新UI选择状态，确保DOM已加载
+                    setTimeout(() => {
+                        updateThemeSelection();
+                        console.log('Restored theme selection:', savedTheme);
+                    }, 100);
+                }
+            } catch (error) {
+                console.log('Failed to restore user input:', error);
+            }
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 开始初始化...');
+            initSimple();
+        });
+
+        function initSimple() {
+            try {
+                // 渲染主题
+                renderSimpleThemes();
+
+                // 绑定基本事件
+                bindSimpleEvents();
+
+                // 恢复用户输入
+                restoreUserInput();
+
+                console.log('✅ 初始化完成');
+            } catch (error) {
+                console.error('❌ 初始化失败:', error);
+            }
+        }
+
+        function renderSimpleThemes() {
+            const themeGrid = document.getElementById('themeGrid');
+            if (!themeGrid) return;
+
+            themeGrid.innerHTML = '';
+            Object.entries(window.appData.themesData).forEach(([key, theme]) => {
+                const card = document.createElement('div');
+                card.className = 'theme-card';
+                card.dataset.theme = key;
+                card.innerHTML = `<div class="theme-icon">${theme.icon}</div><div class="theme-name">${theme.name}</div>`;
+                card.addEventListener('click', () => selectSimpleTheme(key));
+                themeGrid.appendChild(card);
+            });
+        }
+
+        function selectSimpleTheme(themeKey) {
+            document.querySelectorAll('.theme-card').forEach(card => {
+                card.classList.toggle('selected', card.dataset.theme === themeKey);
+            });
+            window.appData.selectedTheme = themeKey;
+            validateSimpleForm();
+        }
+
+        function validateSimpleForm() {
+            const title = document.getElementById('titleInput')?.value?.trim() || '';
+            const apiKey = document.getElementById('apiKeyInput')?.value?.trim() || '';
+            const isValid = window.appData.selectedTheme && title.length > 0 && apiKey.length > 0;
+
+            const generateBtn = document.getElementById('generateBtn');
+            if (generateBtn) {
+                generateBtn.disabled = !isValid;
+            }
+        }
+
+        function bindSimpleEvents() {
+            // 基本输入事件
+            const titleInput = document.getElementById('titleInput');
+            const apiKeyInput = document.getElementById('apiKeyInput');
+            const generateBtn = document.getElementById('generateBtn');
+
+            if (titleInput) titleInput.addEventListener('input', validateSimpleForm);
+            if (apiKeyInput) apiKeyInput.addEventListener('input', validateSimpleForm);
+            if (generateBtn) generateBtn.addEventListener('click', handleSimpleGenerate);
+
+            // 导航事件
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const page = btn.dataset.page;
+                    switchSimplePage(page);
+                });
+            });
+        }
+
+        function switchSimplePage(page) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.page === page);
+            });
+            document.querySelectorAll('.page').forEach(pageElement => {
+                pageElement.classList.toggle('active', pageElement.id === `${page}Page`);
+            });
+
+            // 加载历史记录
+            if (page === 'history') {
+                loadHistory();
+            }
+        }
+
+        // 加载历史记录
+        function loadHistory() {
+            try {
+                const history = JSON.parse(localStorage.getItem('literacy_history') || '[]');
+                const historyGrid = document.getElementById('historyGrid');
+                const emptyHistory = document.getElementById('emptyHistory');
+
+                if (!historyGrid || !emptyHistory) return;
+
+                if (history.length === 0) {
+                    emptyHistory.style.display = 'block';
+                    historyGrid.style.display = 'none';
+                    return;
+                }
+
+                emptyHistory.style.display = 'none';
+                historyGrid.style.display = 'grid';
+                historyGrid.innerHTML = '';
+
+                history.forEach(item => {
+                    const historyItem = document.createElement('div');
+                    historyItem.className = 'history-item';
+                    historyItem.style.cssText = `
+                        background: white;
+                        border: 1px solid #ddd;
+                        border-radius: 10px;
+                        padding: 15px;
+                        margin-bottom: 15px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    `;
+
+                    historyItem.innerHTML = `
+                        <img src="${item.imageUrl}" alt="${item.title}" style="max-width: 100%; border-radius: 5px;">
+                        <div style="margin-top: 10px;">
+                            <h4 style="margin: 0; color: #333;">${item.title}</h4>
+                            <p style="margin: 0; color: #666; font-size: 14px;">${new Date(item.timestamp).toLocaleString('zh-CN')}</p>
+                        </div>
+                    `;
+
+                    historyItem.addEventListener('click', () => {
+                        showHistoryItemModal(item);
+                    });
+
+                    historyGrid.appendChild(historyItem);
+                });
+            } catch (error) {
+                console.error('加载历史记录失败:', error);
+            }
+        }
+
+        // 显示历史记录模态框
+        function showHistoryItemModal(item) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+            `;
+
+            modal.innerHTML = `
+                <div style="
+                    background: white;
+                    border-radius: 15px;
+                    padding: 30px;
+                    max-width: 90%;
+                    max-height: 90%;
+                    overflow: auto;
+                    position: relative;
+                ">
+                    <button onclick="this.closest('.modal').remove()" style="
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        background: none;
+                        border: none;
+                        font-size: 20px;
+                        cursor: pointer;
+                    ">❌</button>
+                    <h3 style="color: #9B59B6; margin-bottom: 20px;">${item.title}</h3>
+                    <div style="text-align: center;">
+                        <img src="${item.imageUrl}" alt="${item.title}" style="max-width: 100%; max-height: 500px; border-radius: 10px; margin-bottom: 20px;">
+                        <p><strong>主题：</strong>${item.themeName || item.theme}</p>
+                        <p><strong>生成时间：</strong>${new Date(item.timestamp).toLocaleString('zh-CN')}</p>
+                    </div>
+                    <div style="display: flex; gap: 15px; margin-top: 20px; justify-content: center;">
+                        <button onclick="downloadImage('${item.imageUrl}', '识字图片_${item.title}_${item.timestamp}.png')" style="
+                            background: linear-gradient(135deg, #4a90e2, #ff6b9d);
+                            color: white;
+                            border: none;
+                            padding: 12px 24px;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            font-weight: bold;
+                        ">💾 下载图片</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            // 点击背景关闭
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+
+        // 创建下载模态框（解决GitHub Pages CORS问题）
+        function createDownloadModal(imageUrl, title) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 2000;
+            `;
+
+            modal.innerHTML = `
+                <div style="
+                    background: white;
+                    border-radius: 15px;
+                    padding: 30px;
+                    max-width: 500px;
+                    width: 90%;
+                    position: relative;
+                ">
+                    <h3 style="color: #9B59B6; margin-bottom: 20px; text-align: center;">💾 下载识字图片</h3>
+
+                    <div style="margin-bottom: 20px; text-align: center;">
+                        <img src="${imageUrl}" alt="生成的识字图片" style="max-width: 100%; max-height: 300px; border-radius: 10px; margin-bottom: 15px;">
+                        <p style="color: #666; font-size: 14px; margin: 10px 0;">
+                            <strong>标题：</strong>${title}
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 20px; background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                        <h4 style="margin: 0 0 10px 0; color: #333;">📥 下载方式：</h4>
+
+                        <div style="margin-bottom: 15px;">
+                            <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">🔗 复制链接：</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" value="${imageUrl}" readonly style="
+                                    flex: 1;
+                                    padding: 8px;
+                                    border: 1px solid #ddd;
+                                    border-radius: 5px;
+                                    font-size: 12px;
+                                    font-family: monospace;
+                                    background: white;
+                                " onclick="this.select()">
+                                <button onclick="copyToClipboard('${imageUrl}')" style="
+                                    padding: 8px 15px;
+                                    background: #4CAF50;
+                                    color: white;
+                                    border: none;
+                                    border-radius: 5px;
+                                    cursor: pointer;
+                                ">📋 复制</button>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">🌐 在新标签页打开：</label>
+                            <button onclick="window.open('${imageUrl}', '_blank')" style="
+                                width: 100%;
+                                padding: 10px;
+                                background: #2196F3;
+                                color: white;
+                                border: none;
+                                border-radius: 5px;
+                                cursor: pointer;
+                                font-size: 14px;
+                            ">🌐 在新标签页打开图片</button>
+                        </div>
+
+                        <div style="color: #666; font-size: 12px; line-height: 1.4;">
+                            💡 <strong>提示：</strong><br>
+                            • 右键点击上方链接选择"复制链接"<br>
+                            • 在手机上长按链接可复制<br>
+                            • 复制链接后粘贴到浏览器地址栏即可下载图片
+                        </div>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <button onclick="this.closest('.modal').remove()" style="
+                            background: linear-gradient(135deg, #4a90e2, #ff6b9d);
+                            color: white;
+                            border: none;
+                            padding: 12px 30px;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            font-weight: bold;
+                            margin: 0 10px;
+                        ">✅ 关闭</button>
+                    </div>
+                </div>
+            `;
+
+            // 点击背景关闭
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+
+            return modal;
+        }
+
+        // 显示图片详情模态框
+        function showImageDetails(imageUrl, title, theme) {
+            const themeName = window.appData.themesData[theme]?.name || theme;
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 2000;
+            `;
+
+            modal.innerHTML = `
+                <div style="
+                    background: white;
+                    border-radius: 15px;
+                    padding: 30px;
+                    max-width: 500px;
+                    width: 90%;
+                    position: relative;
+                ">
+                    <h3 style="color: #9B59B6; margin-bottom: 20px; text-align: center;">📚 图片详情</h3>
+
+                    <div style="margin-bottom: 20px; text-align: center;">
+                        <img src="${imageUrl}" alt="${title}" style="max-width: 100%; max-height: 300px; border-radius: 10px; margin-bottom: 15px;">
+                        <p style="color: #333; font-weight: bold; margin: 10px 0;">${title}</p>
+                        <p style="color: #666;">主题：${themeName}</p>
+                        <p style="color: #999; font-size: 12px;">
+                            生成时间：${new Date().toLocaleString('zh-CN')}
+                        </p>
+                    </div>
+
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <h4 style="margin: 0 0 10px 0; color: #333;">✅ 已自动保存到历史记录</h4>
+                        <p style="margin: 0; color: #666; font-size: 14px;">
+                            这张图片已经保存到浏览器的历史记录中，你可以在"历史记录"页面查看所有生成的图片。
+                        </p>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <button onclick="this.closest('.modal').remove()" style="
+                            background: linear-gradient(135deg, #4a90e2, #ff6b9d);
+                            color: white;
+                            border: none;
+                            padding: 12px 30px;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            font-weight: bold;
+                        ">✅ 确定</button>
+                    </div>
+                </div>
+            `;
+
+            // 点击背景关闭
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+
+            return modal;
+        }
+
+        // 复制到剪贴板功能
+        function copyToClipboard(text) {
+            // 创建临时文本区域
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-9999px';
+            textArea.style.top = '-9999px';
+            document.body.appendChild(textArea);
+
+            try {
+                textArea.select();
+                document.execCommand('copy');
+                showNotification('✅ 链接已复制到剪贴板！');
+            } catch (err) {
+                // 备用方案：提示用户手动复制
+                showNotification('📋 请手动复制链接');
+            } finally {
+                document.body.removeChild(textArea);
+            }
+        }
+
+        // 显示通知
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 3000;
+                font-weight: bold;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // 处理图片加载错误（GitHub Pages 兼容）
+        function handleImageError(img) {
+            img.style.display = 'none';
+            const container = img.parentElement;
+            const imageUrl = img.src;
+
+            const errorDiv = document.createElement('div');
+            errorDiv.style.cssText = `
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 300px;
+                background: #fff3e0;
+                border: 2px dashed #ff9800;
+                border-radius: 15px;
+                color: #f57c00;
+                padding: 20px;
+                text-align: center;
+                font-size: 16px;
+            `;
+            errorDiv.innerHTML = `
+                <div style="font-size: 48px; margin-bottom: 15px;">🌐</div>
+                <div style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #e65100;">图片无法直接显示</div>
+                <div style="margin-bottom: 20px; font-size: 14px; color: #666;">
+                    GitHub Pages 环境下的安全限制导致图片无法直接显示<br>
+                    但你可以通过以下方式查看和下载图片
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 300px;">
+                    <button onclick="window.open('${imageUrl}', '_blank')" style="
+                        background: #2196F3;
+                        color: white;
+                        border: none;
+                        padding: 12px 20px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 14px;
+                        font-weight: bold;
+                    ">🌐 在新标签页查看图片</button>
+                    <button onclick="copyToClipboard('${imageUrl}')" style="
+                        background: #4CAF50;
+                        color: white;
+                        border: none;
+                        padding: 12px 20px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 14px;
+                        font-weight: bold;
+                    ">📋 复制图片链接</button>
+                    <button onclick="showImageDownloadHelp('${imageUrl}')" style="
+                        background: #9C27B0;
+                        color: white;
+                        border: none;
+                        padding: 12px 20px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 14px;
+                        font-weight: bold;
+                    ">💡 下载帮助</button>
+                </div>
+            `;
+
+            container.appendChild(errorDiv);
+        }
+
+        // 显示图片下载帮助
+        function showImageDownloadHelp(imageUrl) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 2000;
+            `;
+
+            modal.innerHTML = `
+                <div style="
+                    background: white;
+                    border-radius: 15px;
+                    padding: 30px;
+                    max-width: 500px;
+                    width: 90%;
+                    position: relative;
+                ">
+                    <h3 style="color: #9C27B0; margin-bottom: 20px; text-align: center;">💡 图片下载指南</h3>
+
+                    <div style="background: #f5f5f5; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                        <h4 style="color: #333; margin-bottom: 15px;">📱 电脑用户：</h4>
+                        <ol style="color: #666; line-height: 1.6; margin-left: 20px;">
+                            <li>右键点击图片选择"在新标签页打开"</li>
+                            <li>在新标签页中右键点击图片</li>
+                            <li>选择"图片另存为"下载</li>
+                        </ol>
+
+                        <h4 style="color: #333; margin: 15px 0;">📱 手机用户：</h4>
+                        <ol style="color: #666; line-height: 1.6; margin-left: 20px;">
+                            <li>长按图片选择"在新标签页打开"</li>
+                            <li>在新标签页中长按图片</li>
+                            <li>选择"保存到相册"下载</li>
+                        </ol>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">🔗 图片链接：</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" value="${imageUrl}" readonly style="
+                                flex: 1;
+                                padding: 10px;
+                                border: 1px solid #ddd;
+                                border-radius: 5px;
+                                font-size: 12px;
+                                font-family: monospace;
+                                background: white;
+                            " onclick="this.select()">
+                            <button onclick="copyToClipboard('${imageUrl}')" style="
+                                padding: 10px 15px;
+                                background: #4CAF50;
+                                color: white;
+                                border: none;
+                                border-radius: 5px;
+                                cursor: pointer;
+                            ">📋 复制</button>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <button onclick="this.closest('.modal').remove()" style="
+                            background: linear-gradient(135deg, #4a90e2, #ff6b9d);
+                            color: white;
+                            border: none;
+                            padding: 12px 30px;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            font-weight: bold;
+                        ">✅ 知道了</button>
+                    </div>
+                </div>
+            `;
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+
+            document.body.appendChild(modal);
+        }
+
+        // 下载图片函数（本地使用）
+        function downloadImage(imageUrl, filename) {
+            const a = document.createElement('a');
+            a.href = imageUrl;
+            a.download = filename;
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        async function handleSimpleGenerate() {
+            if (window.appData.isGenerating) return;
+
+            const title = document.getElementById('titleInput')?.value?.trim() || '';
+            const apiKey = document.getElementById('apiKeyInput')?.value?.trim() || '';
+
+            if (!window.appData.selectedTheme || !title || !apiKey) {
+                showNotification('⚠️ 请填写所有必填项：主题、标题和API密钥');
+                return;
+            }
+
+            // 保存用户输入到本地存储
+            try {
+                localStorage.setItem('literacy_user_title', title);
+                localStorage.setItem('literacy_user_api_key', apiKey);
+                localStorage.setItem('literacy_user_theme', window.appData.selectedTheme);
+            } catch (error) {
+                console.log('Failed to save user input:', error);
+            }
+
+            window.appData.isGenerating = true;
+            const generateBtn = document.getElementById('generateBtn');
+            if (generateBtn) {
+                generateBtn.disabled = true;
+                generateBtn.innerHTML = '🎨 AI正在绘制中...<span class="loading-dots"></span>';
+            }
+
+            try {
+                const theme = window.appData.themesData[window.appData.selectedTheme];
+                const prompt = `儿童识字海报：《${title}》，主题：${theme.name}。词汇：${theme.vocabulary.core.map(item => item.chinese).join('、')}。风格：卡通插画，拼音标注。`;
+
+                const createResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'nano-banana-pro',
+                        input: {
+                            prompt: prompt,
+                            aspect_ratio: '3:4',
+                            resolution: '2K',
+                            output_format: 'png'
+                        },
+                        callBackUrl: null
+                    })
+                });
+
+                const createData = await createResponse.json();
+                if (!createResponse.ok || !createData.data?.taskId) {
+                    throw new Error(createData.msg || '创建任务失败');
+                }
+
+                const taskId = createData.data.taskId;
+
+                // 轮询结果（简化版）
+                for (let i = 0; i < 30; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 3000));
+
+                    const queryResponse = await fetch(`https://api.kie.ai/api/v1/jobs/recordInfo?taskId=${taskId}`, {
+                        headers: { 'Authorization': `Bearer ${apiKey}` }
+                    });
+
+                    const queryData = await queryResponse.json();
+                    const state = queryData.data?.state;
+
+                    if (state === 'success') {
+                        const resultJson = JSON.parse(queryData.data.resultJson);
+                        const imageUrl = resultJson.resultUrls[0];
+                        showSimpleResult(imageUrl, title);
+                        return;
+                    } else if (state === 'fail') {
+                        throw new Error(`生成失败: ${queryData.data?.failMsg}`);
+                    }
+                }
+
+                throw new Error('生成超时，请重试');
+
+            } catch (error) {
+                alert('生成失败: ' + error.message);
+            } finally {
+                window.appData.isGenerating = false;
+                if (generateBtn) {
+                    generateBtn.disabled = false;
+                    generateBtn.textContent = '🪄 开始生成魔法图片';
+                }
+            }
+        }
+
+        function showSimpleResult(imageUrl, title) {
+            const resultSection = document.getElementById('resultSection');
+            const resultImage = document.getElementById('resultImage');
+
+            if (resultSection && resultImage) {
+                window.appData.currentResult = { imageUrl, title };
+
+                // 增强图片加载处理
+                resultImage.onload = () => {
+                    console.log('Image loaded successfully');
+                    resultSection.classList.remove('hidden');
+                    resultSection.scrollIntoView({ behavior: 'smooth' });
+                };
+
+                resultImage.onerror = () => {
+                    console.log('Image failed to load, showing error handler');
+                    handleImageError(resultImage);
+                };
+
+                resultImage.src = imageUrl;
+
+                // 自动保存到历史记录（GitHub Pages 兼容）
+                try {
+                    saveToHistory(imageUrl, title, window.appData.selectedTheme);
+                } catch (error) {
+                    console.log('Failed to save to history:', error);
+                }
+
+                // 绑定按钮事件（增加重试机制）
+                const bindButtons = () => {
+                    const downloadBtn = document.getElementById('downloadBtn');
+                    if (downloadBtn) {
+                        downloadBtn.onclick = () => {
+                            try {
+                                const downloadModal = createDownloadModal(imageUrl, title);
+                                document.body.appendChild(downloadModal);
+                            } catch (error) {
+                                console.error('Failed to create download modal:', error);
+                                showNotification('❌ 下载功能暂时不可用，请稍后再试');
+                            }
+                        };
+                    }
+
+                    const saveHistoryBtn = document.getElementById('saveHistoryBtn');
+                    if (saveHistoryBtn) {
+                        saveHistoryBtn.onclick = () => {
+                            try {
+                                showImageDetails(imageUrl, title, window.appData.selectedTheme);
+                            } catch (error) {
+                                console.error('Failed to show image details:', error);
+                                showNotification('❌ 历史记录功能暂时不可用，请稍后再试');
+                            }
+                        };
+                    }
+                };
+
+                // 使用更可靠的方式绑定按钮
+                setTimeout(bindButtons, 100);
+
+                // 备用绑定机制
+                setTimeout(bindButtons, 1000);
+            }
+        }
+
+        // 保存到历史记录函数
+        function saveToHistory(imageUrl, title, theme) {
+            try {
+                const history = JSON.parse(localStorage.getItem('literacy_history') || '[]');
+                const historyItem = {
+                    id: Date.now().toString(),
+                    title: title,
+                    theme: theme,
+                    themeName: window.appData.themesData[theme]?.name || theme,
+                    imageUrl: imageUrl,
+                    timestamp: Date.now()
+                };
+
+                history.unshift(historyItem);
+
+                // Keep only last 50 items
+                if (history.length > 50) {
+                    history.splice(50);
+                }
+
+                localStorage.setItem('literacy_history', JSON.stringify(history));
+                console.log('✅ 已自动保存到历史记录:', title);
+            } catch (error) {
+                console.error('❌ 保存历史记录失败:', error);
+            }
+        }
+
+        // 简单的页面切换函数
+        window.switchPage = switchSimplePage;
+
+        console.log('🎯 简化版加载完成');
+    </script>
+</body>
+</html>

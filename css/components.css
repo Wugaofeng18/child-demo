@@ -1,0 +1,499 @@
+/* =================================
+   Disney Magic Literacy Park
+   Component Styles
+   ================================= */
+
+/* Modal Component */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--cloud-white);
+  border-radius: var(--radius-rounded);
+  padding: var(--spacing-2xl);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: scale(0.8);
+  transition: transform 0.3s var(--transition-bounce);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 3px solid var(--magic-blue);
+  position: relative;
+}
+
+.modal.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--silver-gray);
+}
+
+.modal-title {
+  font-family: var(--font-secondary);
+  font-size: 1.5rem;
+  color: var(--royal-purple);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--charcoal-gray);
+  transition: all 0.3s var(--transition-smooth);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  background: var(--silver-gray);
+  color: var(--midnight-black);
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  color: var(--charcoal-gray);
+  line-height: 1.7;
+}
+
+.modal-footer {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: flex-end;
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 2px solid var(--silver-gray);
+}
+
+/* Progress Indicator */
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.progress-content {
+  text-align: center;
+  max-width: 400px;
+  padding: var(--spacing-2xl);
+}
+
+.progress-icon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-lg);
+  animation: rotate 2s linear infinite;
+}
+
+.progress-title {
+  font-family: var(--font-secondary);
+  font-size: 1.5rem;
+  color: var(--royal-purple);
+  margin-bottom: var(--spacing-md);
+}
+
+.progress-message {
+  color: var(--charcoal-gray);
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.1rem;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: var(--silver-gray);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: var(--spacing-md);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--gradient-magic);
+  border-radius: 4px;
+  transition: width 0.3s var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.progress-step {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--silver-gray);
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.progress-step.active {
+  background: var(--magic-blue);
+  transform: scale(1.2);
+}
+
+.progress-step.completed {
+  background: var(--forest-green);
+}
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.toast {
+  background: var(--cloud-white);
+  border-radius: var(--radius-rounded);
+  padding: var(--spacing-md) var(--spacing-lg);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  min-width: 300px;
+  max-width: 400px;
+  transform: translateX(400px);
+  transition: transform 0.3s var(--transition-bounce);
+  border-left: 4px solid var(--magic-blue);
+}
+
+.toast.show {
+  transform: translateX(0);
+}
+
+.toast.success {
+  border-left-color: var(--forest-green);
+}
+
+.toast.error {
+  border-left-color: var(--disney-red);
+}
+
+.toast.warning {
+  border-left-color: var(--disney-orange);
+}
+
+.toast.info {
+  border-left-color: var(--magic-blue);
+}
+
+.toast-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.toast-message {
+  flex: 1;
+  color: var(--midnight-black);
+  font-family: var(--font-body);
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--charcoal-gray);
+  padding: var(--spacing-xs);
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.toast-close:hover {
+  color: var(--midnight-black);
+  transform: scale(1.1);
+}
+
+/* Loading States */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--silver-gray);
+  border-top: 3px solid var(--magic-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--charcoal-gray);
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.loading-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--magic-blue);
+  border-radius: 50%;
+  animation: bounce-dot 1.4s infinite ease-in-out both;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+/* Mickey Mouse Ears Button Effect */
+.mickey-btn {
+  position: relative;
+  background: var(--disney-black);
+  color: var(--cloud-white);
+  border: none;
+  border-radius: 50px;
+  padding: 15px 30px;
+  font-family: var(--font-secondary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s var(--transition-bounce);
+  overflow: hidden;
+}
+
+.mickey-btn:before,
+.mickey-btn:after {
+  content: '';
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: var(--disney-black);
+  border-radius: 50%;
+  top: -10px;
+  transition: all 0.3s var(--transition-bounce);
+}
+
+.mickey-btn:before {
+  left: 15px;
+}
+
+.mickey-btn:after {
+  right: 15px;
+}
+
+.mickey-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.mickey-btn:hover:before,
+.mickey-btn:hover:after {
+  top: -15px;
+}
+
+/* Star Burst Effect */
+.star-burst {
+  position: relative;
+  overflow: visible;
+}
+
+.star-burst:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--sparkle-yellow) 0%, transparent 70%);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 0.5s var(--transition-bounce);
+  z-index: -1;
+}
+
+.star-burst:hover:before {
+  opacity: 0.3;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+/* Floating Animation */
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Sparkle Trail Effect */
+.sparkle-trail {
+  position: relative;
+  overflow: hidden;
+}
+
+.sparkle-trail:before {
+  content: '✨';
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateY(-50%);
+  animation: sparkle-trail 2s infinite;
+}
+
+@keyframes sparkle-trail {
+  0% {
+    left: -20px;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% + 20px);
+    opacity: 0;
+  }
+}
+
+/* Confetti Effect */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--sparkle-yellow);
+  position: absolute;
+  animation: confetti-fall 3s linear infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    padding: var(--spacing-lg);
+    margin: var(--spacing-md);
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+  }
+
+  .toast-container {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+  }
+
+  .toast {
+    min-width: auto;
+    max-width: none;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce-dot {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}

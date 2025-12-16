@@ -1,0 +1,684 @@
+{
+  "themes": {
+    "supermarket": {
+      "name": "超市",
+      "icon": "🛒",
+      "description": "Supermarket shopping experience",
+      "vocabulary": {
+        "core": [
+          {
+            "chinese": "收银员",
+            "pinyin": "shōu yín yuán"
+          },
+          {
+            "chinese": "货架",
+            "pinyin": "huò jià"
+          },
+          {
+            "chinese": "购物车",
+            "pinyin": "gòu wù chē"
+          },
+          {
+            "chinese": "收银台",
+            "pinyin": "shōu yín tái"
+          },
+          {
+            "chinese": "入口",
+            "pinyin": "rù kǒu"
+          }
+        ],
+        "items": [
+          {
+            "chinese": "苹果",
+            "pinyin": "píng guǒ"
+          },
+          {
+            "chinese": "牛奶",
+            "pinyin": "niú nǎi"
+          },
+          {
+            "chinese": "面包",
+            "pinyin": "miàn bāo"
+          },
+          {
+            "chinese": "鸡蛋",
+            "pinyin": "jī dàn"
+          },
+          {
+            "chinese": "香蕉",
+            "pinyin": "xiāng jiāo"
+          },
+          {
+            "chinese": "橙汁",
+            "pinyin": "chéng zhī"
+          },
+          {
+            "chinese": "饼干",
+            "pinyin": "bǐng gān"
+          },
+          {
+            "chinese": "糖果",
+            "pinyin": "táng guǒ"
+          }
+        ],
+        "environment": [
+          {
+            "chinese": "出口",
+            "pinyin": "chū kǒu"
+          },
+          {
+            "chinese": "灯",
+            "pinyin": "dēng"
+          },
+          {
+            "chinese": "墙",
+            "pinyin": "qiáng"
+          },
+          {
+            "chinese": "标价牌",
+            "pinyin": "biāo jià pái"
+          },
+          {
+            "chinese": "冰箱",
+            "pinyin": "bīng xiāng"
+          }
+        ]
+      }
+    },
+    "hospital": {
+      "name": "医院",
+      "icon": "🏥",
+      "description": "Hospital and healthcare environment",
+      "vocabulary": {
+        "core": [
+          {
+            "chinese": "医生",
+            "pinyin": "yī shēng"
+          },
+          {
+            "chinese": "护士",
+            "pinyin": "hù shi"
+          },
+          {
+            "chinese": "病人",
+            "pinyin": "bìng rén"
+          },
+          {
+            "chinese": "病床",
+            "pinyin": "bìng chuáng"
+          },
+          {
+            "chinese": "候诊室",
+            "pinyin": "hòu zhěn shì"
+          }
+        ],
+        "items": [
+          {
+            "chinese": "听诊器",
+            "pinyin": "tīng zhěn qì"
+          },
+          {
+            "chinese": "体温计",
+            "pinyin": "tǐ wēn jì"
+          },
+          {
+            "chinese": "药片",
+            "pinyin": "yào piàn"
+          },
+          {
+            "chinese": "针管",
+            "pinyin": "zhēn guǎn"
+          },
+          {
+            "chinese": "绷带",
+            "pinyin": "bēng dài"
+          },
+          {
+            "chinese": "药方",
+            "pinyin": "yào fāng"
+          },
+          {
+            "chinese": "口罩",
+            "pinyin": "kǒu zhào"
+          },
+          {
+            "chinese": "轮椅",
+            "pinyin": "lún yǐ"
+          }
+        ],
+        "environment": [
+          {
+            "chinese": "急诊室",
+            "pinyin": "jí zhěn shì"
+          },
+          {
+            "chinese": "手术室",
+            "pinyin": "shǒu shù shì"
+          },
+          {
+            "chinese": "药房",
+            "pinyin": "yào fáng"
+          },
+          {
+            "chinese": "挂号处",
+            "pinyin": "guà hào chù"
+          },
+          {
+            "chinese": "救护车",
+            "pinyin": "jiù hù chē"
+          }
+        ]
+      }
+    },
+    "park": {
+      "name": "公园",
+      "icon": "🌳",
+      "description": "Park and recreational area",
+      "vocabulary": {
+        "core": [
+          {
+            "chinese": "大树",
+            "pinyin": "dà shù"
+          },
+          {
+            "chinese": "草地",
+            "pinyin": "cǎo dì"
+          },
+          {
+            "chinese": "花坛",
+            "pinyin": "huā tán"
+          },
+          {
+            "chinese": "长椅",
+            "pinyin": "cháng yǐ"
+          },
+          {
+            "chinese": "小路",
+            "pinyin": "xiǎo lù"
+          }
+        ],
+        "items": [
+          {
+            "chinese": "秋千",
+            "pinyin": "qiū qiān"
+          },
+          {
+            "chinese": "滑梯",
+            "pinyin": "huá tī"
+          },
+          {
+            "chinese": "跷跷板",
+            "pinyin": "qiāo qiāo bǎn"
+          },
+          {
+            "chinese": "沙坑",
+            "pinyin": "shā kēng"
+          },
+          {
+            "chinese": "喷泉",
+            "pinyin": "pēn quán"
+          },
+          {
+            "chinese": "鸽子",
+            "pinyin": "gē zi"
+          },
+          {
+            "chinese": "气球",
+            "pinyin": "qì qiú"
+          },
+          {
+            "chinese": "风筝",
+            "pinyin": "fēng zheng"
+          }
+        ],
+        "environment": [
+          {
+            "chinese": "湖泊",
+            "pinyin": "hú pō"
+          },
+          {
+            "chinese": "小桥",
+            "pinyin": "xiǎo qiáo"
+          },
+          {
+            "chinese": "路灯",
+            "pinyin": "lù dēng"
+          },
+          {
+            "chinese": "垃圾桶",
+            "pinyin": "lā jī tǒng"
+          },
+          {
+            "chinese": "告示牌",
+            "pinyin": "gào shì pái"
+          }
+        ]
+      }
+    },
+    "school": {
+      "name": "学校",
+      "icon": "🏫",
+      "description": "School and educational environment",
+      "vocabulary": {
+        "core": [
+          {
+            "chinese": "老师",
+            "pinyin": "lǎo shī"
+          },
+          {
+            "chinese": "学生",
+            "pinyin": "xué shēng"
+          },
+          {
+            "chinese": "教室",
+            "pinyin": "jiào shì"
+          },
+          {
+            "chinese": "黑板",
+            "pinyin": "hēi bǎn"
+          },
+          {
+            "chinese": "课桌",
+            "pinyin": "kè zhuō"
+          }
+        ],
+        "items": [
+          {
+            "chinese": "书包",
+            "pinyin": "shū bāo"
+          },
+          {
+            "chinese": "铅笔",
+            "pinyin": "qiān bǐ"
+          },
+          {
+            "chinese": "橡皮",
+            "pinyin": "xiàng pí"
+          },
+          {
+            "chinese": "课本",
+            "pinyin": "kè běn"
+          },
+          {
+            "chinese": "作业本",
+            "pinyin": "zuò yè běn"
+          },
+          {
+            "chinese": "尺子",
+            "pinyin": "chǐ zi"
+          },
+          {
+            "chinese": "彩笔",
+            "pinyin": "cǎi bǐ"
+          },
+          {
+            "chinese": "地球仪",
+            "pinyin": "dì qiú yí"
+          }
+        ],
+        "environment": [
+          {
+            "chinese": "操场",
+            "pinyin": "cāo chǎng"
+          },
+          {
+            "chinese": "图书馆",
+            "pinyin": "tú shū guǎn"
+          },
+          {
+            "chinese": "食堂",
+            "pinyin": "shí táng"
+          },
+          {
+            "chinese": "校门",
+            "pinyin": "xiào mén"
+          },
+          {
+            "chinese": "旗杆",
+            "pinyin": "qí gān"
+          }
+        ]
+      }
+    },
+    "home": {
+      "name": "家庭",
+      "icon": "🏠",
+      "description": "Home and family environment",
+      "vocabulary": {
+        "core": [
+          {
+            "chinese": "爸爸",
+            "pinyin": "bà ba"
+          },
+          {
+            "chinese": "妈妈",
+            "pinyin": "mā ma"
+          },
+          {
+            "chinese": "客厅",
+            "pinyin": "kè tīng"
+          },
+          {
+            "chinese": "卧室",
+            "pinyin": "wò shì"
+          },
+          {
+            "chinese": "厨房",
+            "pinyin": "chú fáng"
+          }
+        ],
+        "items": [
+          {
+            "chinese": "沙发",
+            "pinyin": "shā fā"
+          },
+          {
+            "chinese": "电视",
+            "pinyin": "diàn shì"
+          },
+          {
+            "chinese": "桌子",
+            "pinyin": "zhuō zi"
+          },
+          {
+            "chinese": "椅子",
+            "pinyin": "yǐ zi"
+          },
+          {
+            "chinese": "床",
+            "pinyin": "chuáng"
+          },
+          {
+            "chinese": "玩具",
+            "pinyin": "wán jù"
+          },
+          {
+            "chinese": "书",
+            "pinyin": "shū"
+          },
+          {
+            "chinese": "台灯",
+            "pinyin": "tái dēng"
+          }
+        ],
+        "environment": [
+          {
+            "chinese": "门",
+            "pinyin": "mén"
+          },
+          {
+            "chinese": "窗户",
+            "pinyin": "chuāng hu"
+          },
+          {
+            "chinese": "阳台",
+            "pinyin": "yáng tái"
+          },
+          {
+            "chinese": "浴室",
+            "pinyin": "yù shì"
+          },
+          {
+            "chinese": "花园",
+            "pinyin": "huā yuán"
+          }
+        ]
+      }
+    },
+    "zoo": {
+      "name": "动物园",
+      "icon": "🦁",
+      "description": "Zoo and animal park",
+      "vocabulary": {
+        "core": [
+          {
+            "chinese": "狮子",
+            "pinyin": "shī zi"
+          },
+          {
+            "chinese": "老虎",
+            "pinyin": "lǎo hǔ"
+          },
+          {
+            "chinese": "大象",
+            "pinyin": "dà xiàng"
+          },
+          {
+            "chinese": "猴子",
+            "pinyin": "hóu zi"
+          },
+          {
+            "chinese": "熊猫",
+            "pinyin": "xióng māo"
+          }
+        ],
+        "items": [
+          {
+            "chinese": "长颈鹿",
+            "pinyin": "cháng jǐng lù"
+          },
+          {
+            "chinese": "斑马",
+            "pinyin": "bān mǎ"
+          },
+          {
+            "chinese": "袋鼠",
+            "pinyin": "dài shǔ"
+          },
+          {
+            "chinese": "企鹅",
+            "pinyin": "qǐ é"
+          },
+          {
+            "chinese": "鹦鹉",
+            "pinyin": "yīng wǔ"
+          },
+          {
+            "chinese": "蛇",
+            "pinyin": "shé"
+          },
+          {
+            "chinese": "乌龟",
+            "pinyin": "wū guī"
+          },
+          {
+            "chinese": "兔子",
+            "pinyin": "tù zi"
+          }
+        ],
+        "environment": [
+          {
+            "chinese": "笼子",
+            "pinyin": "lóng zi"
+          },
+          {
+            "chinese": "池塘",
+            "pinyin": "chí táng"
+          },
+          {
+            "chinese": "假山",
+            "pinyin": "jiǎ shān"
+          },
+          {
+            "chinese": "喂食台",
+            "pinyin": "wèi shí tái"
+          },
+          {
+            "chinese": "指示牌",
+            "pinyin": "zhǐ shì pái"
+          }
+        ]
+      }
+    },
+    "playground": {
+      "name": "游乐场",
+      "icon": "🎠",
+      "description": "Amusement park and playground",
+      "vocabulary": {
+        "core": [
+          {
+            "chinese": "旋转木马",
+            "pinyin": "xuán zhuǎn mù mǎ"
+          },
+          {
+            "chinese": "摩天轮",
+            "pinyin": "mó tiān lún"
+          },
+          {
+            "chinese": "过山车",
+            "pinyin": "guò shān chē"
+          },
+          {
+            "chinese": "海盗船",
+            "pinyin": "hǎi dào chuán"
+          },
+          {
+            "chinese": "碰碰车",
+            "pinyin": "pèng pèng chē"
+          }
+        ],
+        "items": [
+          {
+            "chinese": "棉花糖",
+            "pinyin": "mián huā táng"
+          },
+          {
+            "chinese": "爆米花",
+            "pinyin": "bào mǐ huā"
+          },
+          {
+            "chinese": "热狗",
+            "pinyin": "rè gǒu"
+          },
+          {
+            "chinese": "冰淇淋",
+            "pinyin": "bīng qí lín"
+          },
+          {
+            "chinese": "气球",
+            "pinyin": "qì qiú"
+          },
+          {
+            "chinese": "玩具熊",
+            "pinyin": "wán jù xióng"
+          },
+          {
+            "chinese": "门票",
+            "pinyin": "mén piào"
+          },
+          {
+            "chinese": "地图",
+            "pinyin": "dì tú"
+          }
+        ],
+        "environment": [
+          {
+            "chinese": "售票处",
+            "pinyin": "shòu piào chù"
+          },
+          {
+            "chinese": "等候区",
+            "pinyin": "děng hòu qū"
+          },
+          {
+            "chinese": "休息区",
+            "pinyin": "xiū xi qū"
+          },
+          {
+            "chinese": "纪念品店",
+            "pinyin": "jì niàn pǐn diàn"
+          },
+          {
+            "chinese": "停车场",
+            "pinyin": "tíng chē chǎng"
+          }
+        ]
+      }
+    },
+    "farm": {
+      "name": "农场",
+      "icon": "🚜",
+      "description": "Farm and agricultural environment",
+      "vocabulary": {
+        "core": [
+          {
+            "chinese": "农夫",
+            "pinyin": "nóng fū"
+          },
+          {
+            "chinese": "拖拉机",
+            "pinyin": "tuō lā jī"
+          },
+          {
+            "chinese": "谷仓",
+            "pinyin": "gǔ cāng"
+          },
+          {
+            "chinese": "农田",
+            "pinyin": "nóng tián"
+          },
+          {
+            "chinese": "篱笆",
+            "pinyin": "lí ba"
+          }
+        ],
+        "items": [
+          {
+            "chinese": "牛",
+            "pinyin": "niú"
+          },
+          {
+            "chinese": "羊",
+            "pinyin": "yáng"
+          },
+          {
+            "chinese": "鸡",
+            "pinyin": "jī"
+          },
+          {
+            "chinese": "鸭",
+            "pinyin": "yā"
+          },
+          {
+            "chinese": "猪",
+            "pinyin": "zhū"
+          },
+          {
+            "chinese": "马",
+            "pinyin": "mǎ"
+          },
+          {
+            "chinese": "稻草人",
+            "pinyin": "dào cǎo rén"
+          },
+          {
+            "chinese": "水井",
+            "pinyin": "shuǐ jǐng"
+          }
+        ],
+        "environment": [
+          {
+            "chinese": "房屋",
+            "pinyin": "fáng wū"
+          },
+          {
+            "chinese": "小路",
+            "pinyin": "xiǎo lù"
+          },
+          {
+            "chinese": "果树",
+            "pinyin": "guǒ shù"
+          },
+          {
+            "chinese": "菜园",
+            "pinyin": "cài yuán"
+          },
+          {
+            "chinese": "风车",
+            "pinyin": "fēng chē"
+          }
+        ]
+      }
+    }
+  }
+}
